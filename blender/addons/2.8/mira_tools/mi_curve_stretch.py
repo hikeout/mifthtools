@@ -186,7 +186,7 @@ class MI_OT_CurveStretch(bpy.types.Operator):
 
         if self.curve_tool_mode == 'SET_POINTS':
             context.area.header_text_set("Scroll Mouse Wheel, +, - keys to set Points Number.")
-            
+
             if event.type in ('WHEELUPMOUSE', 'NUMPAD_PLUS', 'EQUAL', 'PLUS') and event.value == 'PRESS':
                 cur_stretch_settings.points_number += 1
             elif event.type in ('WHEELDOWNMOUSE','NUMPAD_MINUS', 'MINUS') and event.value == 'PRESS':
@@ -461,7 +461,7 @@ class MI_OT_CurveStretch(bpy.types.Operator):
             # allow navigation
             return {'PASS_THROUGH'}
 
-        elif event.type in {'RIGHTMOUSE', 'ESC'}:
+        elif event.type in {'Q', 'ESC'}:
 
             # snap new points to scene geometries
             if curve_settings.surface_snap is True and curve_settings.snap_points is True:
@@ -580,7 +580,7 @@ def draw_curve_2d(curves, active_cur, context):
     rv3d = context.region_data
     curve_settings = context.scene.mi_settings
     addon_prefs = context.preferences.addons[__package__].preferences
-    
+
     # coord = event.mouse_region_x, event.mouse_region_y
     for curve in curves:
         for cu_point in curve.curve_points:
@@ -639,4 +639,3 @@ def draw_text_2d(self, context):
     blf.color(0, 0.0, 0.0, 0.0, 1.0)
     bgl.glDisable(bgl.GL_BLEND)
     #bgl.glColor(0, 0.0, 0.0, 0.0, 1.0)
-
